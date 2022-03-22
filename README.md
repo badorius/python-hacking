@@ -12,3 +12,7 @@ import subprocess
 ```
 Subprocess example changeing HW adress from eth0 interface:
 >resources/training/[eth0hwch.py](https://github.com/badorius/python-hacking/blob/main/resources/training/eth0hwch.py)
+
+# Introduction to Scapy
+Scapy library is designed to send, sniff, dissect, and edit network packets. Scapy is a very powerful network packet manipulation tool. 
+>[scapy site](https://scapy.readthedocs.io/en/latest/introduction.html)

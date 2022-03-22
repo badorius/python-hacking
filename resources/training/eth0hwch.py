@@ -8,3 +8,4 @@ if __name__ == "__main__":
     subprocess.run(["ifconfig", interface, "hw", "ehter", new_mac])
     print("MAC adress changed to ", new_mac)
     subprocess.run(["ifconfig", interface, "up"])
+    print("network interfaced turned on")
