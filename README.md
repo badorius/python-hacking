@@ -11,5 +11,4 @@ To import this library:
 import subprocess
 ```
 Subprocess example changeing HW adress from eth0 interface:
->resources/training/[eth0hwch.py](https://github.com/badorius/python-hacking/blob/main/resou
-rces/training/eth0hwch.py)
+>resources/training/[eth0hwch.py](https://github.com/badorius/python-hacking/blob/main/resources/training/eth0hwch.py)
