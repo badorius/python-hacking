@@ -47,6 +47,9 @@ To send and recive packets, we can use a function called sr. To import this func
 ```python
 from scapy.sendrecv import sr1
 ```
+For more detail about sr function see
+>[https://thepacketgeek.com/scapy/building-network-tools/part-06/](https://thepacketgeek.com/scapy/building-network-tools/part-06/)
+
 Notes from example:
 ```python
     #Create IP Layer
@@ -63,7 +66,7 @@ Output:
 
 ```shell
 sudo python main.py 
-[sudo] password for darthv: 
+[sudo] password for user: 
 Begin emission:
 Finished sending 1 packets.
 ...*
