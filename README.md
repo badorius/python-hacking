@@ -45,7 +45,7 @@ from scapy.layers.inet import IP
 ```
 To send and recive packets, we can use a function called sr. To import this function:
 ```python
-from scapy.all import sr
+from scapy.sendrecv import sr1
 ```
 Notes from example:
 ```python
