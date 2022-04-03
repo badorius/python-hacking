@@ -27,7 +27,7 @@ or
 sudo pip3 install scapy
 ```
 
-# Understanding how Scapy Words
+# Understanding how Scapy Works
 Create a small ping request example:
 
 In case you would like to import all scapy package library to our python program: 
@@ -119,7 +119,9 @@ print("Destination  = ", ip_layer.dst)
 #PRINTING SUMMARY
 print("Summary  = ",ip_layer.summary())
 ```
-The output will be:
+>resources/training/ls_layer-scapy/[main.py](https://github.com/badorius/python-hacking/blob/main/resources/training/ls_layer-scapy/main.py)
+
+The output should be:
 ```shell
 version    : BitField  (4 bits)                  = 4               ('4')
 ihl        : BitField  (4 bits)                  = None            ('None')
@@ -153,16 +155,19 @@ from scapy.layers.l2 import ARP
 if __name__ == "__main__":
     broadcast = "FF:FF:FF:FF:FF:FF"
     ether_layer = Ether(dst = broadcast)
-    ip_range = "192.168.1.0/24"
+    ip_range = "192.168.1.1/24"
     arp_layer = ARP(pdst = ip_range)
     packet = ether_layer / arp_layer
+    #srp returns both answered and unanswered packets. We are interested in answered packets from online devices only.
     ans, unans = srp(packet, iface = "wlan0", timeout=2)
 
+    # Now, We iterate over the answer to see the IP and corresponding MAC addresses:
     for snd, rcv in ans:
         ip = rcv[ARP].psrc
         mac = rcv[Ether].src
         print("IP = ", ip, " MAC = ", mac)
 ```
+>resources/training/arp_scanner-scapy/[main.py](https://github.com/badorius/python-hacking/blob/main/resources/training/arp_scanner-scapy/main.py)
 
 
 
