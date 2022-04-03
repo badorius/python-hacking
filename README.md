@@ -39,7 +39,7 @@ To use ICMP layer, we need to import:
 from scapy.layers.inet import ICMP
 
 ```
-To send a pint request, we need to create an IP layer packet, to import IP Layer from scapy:
+To send a ping request, we need to create an IP layer packet, to import IP Layer from scapy:
 ```python
 from scapy.layers.inet import IP
 ```
@@ -62,6 +62,8 @@ Notes from example:
     #Send paquet with sr1
     response = sr1(packet, iface="eno1")
 ```
+>NOTE: The / operator. This operator is used to combine different layers in Scapy
+
 Output:
 
 ```shell
@@ -99,6 +101,68 @@ None
 ```
 Example:
 >resources/training/introduction-scapy/[main.py](https://github.com/badorius/python-hacking/blob/main/resources/training/introduction-scapy/main.py)
+
+If you want to see more details about a certain layer in Scapy and what options are available in the layer to modify, you can use the ls function in Scapy. To import this function, you can use this command:
+```python
+#CREATE AND IP_LAYER PACKET AND LS 
+from scapy.layers.inet import IP
+from scapy.all import ls
+
+#To get information about ip_layer, we can print ls like this:
+dest_ip = "www.google.com"
+ip_layer = IP(dst = dest_ip)
+print(ls(ip_layer))
+
+#PRINTING ONE VALUE FROM LS
+print("Destination  = ", ip_layer.dst)
+
+#PRINTING SUMMARY
+print("Summary  = ",ip_layer.summary())
+```
+The output will be:
+```shell
+version    : BitField  (4 bits)                  = 4               ('4')
+ihl        : BitField  (4 bits)                  = None            ('None')
+tos        : XByteField                          = 0               ('0')
+len        : ShortField                          = None            ('None')
+id         : ShortField                          = 1               ('1')
+flags      : FlagsField                          = <Flag 0 ()>     ('<Flag 0 ()>')
+frag       : BitField  (13 bits)                 = 0               ('0')
+ttl        : ByteField                           = 64              ('64')
+proto      : ByteEnumField                       = 0               ('0')
+chksum     : XShortField                         = None            ('None')
+src        : SourceIPField                       = '192.168.1.23'  ('None')
+dst        : DestIPField                         = Net("www.google.com/32") ('None')
+options    : PacketListField                     = []              ('[]')
+None
+Destination  =  142.250.178.164
+Summary  =  192.168.1.23 > Net("www.google.com/32") hopopt
+Process finished with exit code 0
+```
+>NOTE: We can access any value from ls using . Example: print("Destination  = ", ip_layer.dst) This function call will print dst value. The same with summary print.
+---
+# Network scanner using Scapy
+We start creating an ARP scanner with python 
+
+```python
+from scapy.layers.inet import Ether
+#from scapy.all import Ether, ARP, srp
+from scapy.all import srp
+from scapy.layers.l2 import ARP
+
+if __name__ == "__main__":
+    broadcast = "FF:FF:FF:FF:FF:FF"
+    ether_layer = Ether(dst = broadcast)
+    ip_range = "192.168.1.0/24"
+    arp_layer = ARP(pdst = ip_range)
+    packet = ether_layer / arp_layer
+    ans, unans = srp(packet, iface = "wlan0", timeout=2)
+
+    for snd, rcv in ans:
+        ip = rcv[ARP].psrc
+        mac = rcv[Ether].src
+        print("IP = ", ip, " MAC = ", mac)
+```
 
 
 
