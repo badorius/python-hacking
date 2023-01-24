@@ -116,4 +116,50 @@ if __name__ == '__main__':
     main()
 ```
 
+---
+
+# Managing Libraries in Python (Continued)
+
+The default site-packages/dist-packages locations are the following:
+
+. Windows 10: PYTHON_INSTALL_DIR\Lib\site-packages: C:\Program Files\Python38\Lib\site-packages
+. Linux: /usr/lib/PYTHON_VERSION/dist-packages/: /usr/lib/python3/dist-packages
+
+
+Python path directories:
+
+```python
+╰─ python                                                                                 ─╯
+Python 3.10.9 (main, Dec 19 2022, 17:35:49) [GCC 12.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import sys
+>>> sys.path
+['', '/usr/lib/python310.zip', '/usr/lib/python3.10', '/usr/lib/python3.10/lib-dynload', '/home/user/.local/lib/python3.10/site-packages', '/usr/lib/python3.10/site-packages']
+>>> 
+```
+
+
+Suppose we wanted to have the packages installed in a specific folder. For example, we wanted to keep all packages related to us inside some /var/www/packages/ directory. In that case, we can have pip install the package and store the content inside this folder with the --target flag, like so:
+
+```shell
+badorius@01[/01]$ python3 -m pip install --target /var/www/packages/ requests
+
+Collecting requests
+  Using cached requests-2.25.1-py2.py3-none-any.whl (61 kB)
+Collecting urllib3<1.27,>=1.21.1
+  Downloading urllib3-1.26.4-py2.py3-none-any.whl (153 kB)
+     |████████████████████████████████| 153 kB 8.1 MB/s
+...SNIP...
+```
+
+# Preparing the Virtual Environment
+
+
+```shell
+badorius@01[/01]$ python3 -m venv academy
+
+```
+
+
+
  
