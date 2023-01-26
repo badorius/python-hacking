@@ -13,6 +13,7 @@ if len(sys.argv) == 4:
     eport = int(sys.argv[3]) + 1
 else:
     print("Invalid amount of Argument")
+    exit()
 
 
 try:
@@ -25,7 +26,7 @@ try:
         # returns an error indicator
         result = s.connect_ex((target, port))
         if result == 0:
-            print("Port {} is open".format(port))
+            print("{} : Port {} is open".format(target, port))
         s.close()
 
 except KeyboardInterrupt:
